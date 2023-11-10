@@ -31,7 +31,7 @@
 }
 .home__main__products__product__photo-container--zoom {
     display: block;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(0, 0, 0);
     color: #FFF;
     position: absolute;
     top: 45%;
@@ -39,6 +39,13 @@
     width: 100%;
     text-transform: uppercase;
     padding: 10px 0;
+    opacity: 40%;
+    transition: color, 3s, opacity, 5s;
+}
+
+.home__main__products__product__photo-container--zoom:hover {
+    opacity: 80%;
+    color: red;
 }
 .home__main__products__product h4{
     margin: 3% 0;
@@ -54,4 +61,11 @@
     padding: 10px;
     text-align: center;
     color: #FFF;
+    transition: background-color, 2s,color,5s, border-radius 10s;
+}
+
+.home__main__products__product__photo-container--more:hover {
+    background-color: blue;
+    color: yellow;
+    border-radius: 12px;
 }

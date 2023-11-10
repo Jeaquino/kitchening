@@ -1,13 +1,16 @@
+
 header{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 #header__logo{
     border-radius: 50%;
     margin: 2% 0;
     width: 50%;
     border: 1px solid #000;
+    animation: sun-rise 0.1s 2 ;
 }
 
 .fa-bars {
@@ -15,10 +18,32 @@ header{
     background-color: var(--colorGrisOscuro);
     color: #FFF;
     margin: 10px 0;
+    animation: sun-rise 4s infinite ;
 }
 .header__nav {
     display: none;
 }
+
+@keyframes sun-rise {
+    0% {
+      /* pushes the sun down past the viewport */
+      /*transform: translateX(60%);
+      z-index: 5;*/
+      opacity: 5%;
+    }
+    25%{
+        /* returns the sun to its default position */
+        /*transform: translateX(-60%);
+        z-index: 5;*/
+        opacity: 100%;
+      }
+      100%{
+        /* returns the sun to its default position */
+        /*transform: translateX(-60%);
+        z-index: 5;*/
+        opacity: 5%;
+      }
+  }
 
 /* media para tablet */
 
