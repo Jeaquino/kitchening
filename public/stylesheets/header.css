@@ -79,3 +79,9 @@ header {
     }
 
 }
+
+@media(min-width:1024px){
+    #header__logo{
+        width: 45%;
+    }
+}
