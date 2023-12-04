@@ -1,34 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title  %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script
-      src="https://kit.fontawesome.com/e2983a7846.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
+<%- include("./partials/head.ejs") %>
   <body class="home__body">
-    <header class="header">
-      <img src="/images/logo.jpg" alt="Imagen del logo" id="header__logo" />
-      <div>
-        <a href="#" class="header__bars">
-            <span class="fa fa-bars"></span>
-          </a>    
-      </div>
-      <nav class="header__nav">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Quienes</a></li>
-          <li><a href="#">Servicios</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Sucursales</a></li>
-          <li><a href="#">Contacto</a></li>
-        </ul>
-      </nav>
-    </header>
+    <%- include("./partials/header.ejs") %>
     <main>
       <div>
         <img
@@ -214,17 +186,6 @@
         </article>
       </section>
     </main>
-    <footer class="footer">
-      <nav class="footer__nav">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Quienes</a></li>
-          <li><a href="#">Servicios</a></li>
-          <li><a href="#">Portfolio</a></li>
-          <li><a href="#">Sucursales</a></li>
-          <li><a href="#">Contacto</a></li>
-        </ul>
-      </nav>
-    </footer>
+    <%- include("./partials/footer.ejs") %>
   </body>
 </html>
