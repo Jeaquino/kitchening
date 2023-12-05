@@ -1,47 +1,7 @@
-const products = [
-    {
-    id:1,
-    nombre:"Producto1",
-    descripcion:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum ex libero nesciunt soluta facere.",
-    imagen:"img-pdto-1.jpg",
-    sticker:"img-nuevo.png"
-},
-{
-    id:2,
-    nombre:"Producto2",
-    descripcion:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum ex libero nesciunt soluta facere.",
-    imagen:"img-pdto-2.jpg",
-    sticker:"img-descuento.png"
-},
-{
-    id:3,
-    nombre:"Producto3",
-    descripcion:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum ex libero nesciunt soluta facere.",
-    imagen:"img-pdto-3.jpg",
-    sticker:"img-gratis.png"
-},
-{
-    id:4,
-    nombre:"Producto4",
-    descripcion:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum ex libero nesciunt soluta facere.",
-    imagen:"img-pdto-1.jpg",
-    sticker:"img-nuevo.png"
-},
-{
-    id:5,
-    nombre:"Producto5",
-    descripcion:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum ex libero nesciunt soluta facere.",
-    imagen:"img-pdto-2.jpg",
-    sticker:"img-descuento.png"
-},
-{
-    id:6,
-    nombre:"Producto6",
-    descripcion:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum ex libero nesciunt soluta facere.",
-    imagen:"img-pdto-3.jpg",
-    sticker:"img-gratis.png"
-}
-];
+const fs = require("fs");
+const path = require("path");
+const json = fs.readFileSync(path.join(__dirname,"../database/products.json"),"utf-8")
+const products = JSON.parse(json);
 
 const example = {
     nombre:"",
@@ -54,9 +14,28 @@ const example = {
         pantalla:'19"'
     }
 }
+
 const productsController = {
+    dashboard:(req, res) => {
+        res.render('products/dashboard', { title: "Dashboard", products });
+    },
+    create:(req, res) => {
+        res.render('products/createProduct', { title: "Create Product" });
+    },
     detail: (req, res) => {
-        res.render('products/detail', { title: 'kitchennig' });
+        const {id} = req.params;
+        const product = products.find(producto => producto.id == id);
+        res.render('products/detail', { title: product.nombre, product });
+    },
+    update: (req, res) => {
+        const {id} = req.params;
+        const product = products.find(producto => producto.id == id);
+        res.render('products/update', { title: product.nombre, product });
+    },
+    delete: (req, res) => {
+        const {id} = req.params;
+        const product = products.find(producto => producto.id == id);
+        res.render('products/da', { title: product.nombre, product });
     },
     example:(req, res) => {
         res.render('products/example', { title: 'kitchennig', product:example });
