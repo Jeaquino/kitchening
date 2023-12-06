@@ -40,5 +40,12 @@
         "descripcion": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum ex libero nesciunt soluta facere.",
         "imagen": "img-pdto-3.jpg",
         "sticker": "img-gratis.png"
+    },
+    {
+        "nombre": "Pastel",
+        "descripcion": "Esta rico",
+        "imagen": "deadpool.jpg",
+        "categoria": "img-gratis.png",
+        "id": 7
     }
 ]

@@ -17,25 +17,50 @@ const example = {
 
 const productsController = {
     dashboard:(req, res) => {
-        res.render('products/dashboard', { title: "Dashboard", products });
+        const propiedades = ["id","nombre","imagen","sticker"];
+        
+        /*for ( prop in products[0]) {
+            propiedades.push(prop)
+        }*/
+        
+        console.log(propiedades);
+        res.render('products/dashboard2', { title: "Dashboard", products, propiedades });
     },
-    create:(req, res) => {
+
+    formCreate:(req, res) => {
         res.render('products/createProduct', { title: "Create Product" });
     },
+
+    create:(req, res) => {
+        const producto = req.body;
+        producto.id = products[products.length-1].id + 1;
+        products.push(producto);
+        console.log(products);
+        const json = JSON.stringify(products);
+        fs.writeFileSync(path.join(__dirname,"../database/products.json"),json,'utf-8')
+        res.redirect("/products/dashboard");
+    },
+
     detail: (req, res) => {
         const {id} = req.params;
         const product = products.find(producto => producto.id == id);
         res.render('products/detail', { title: product.nombre, product });
     },
+
+    formUpdate: (req, res) => {
+        const {id} = req.params;
+        const product = products.find(producto => producto.id == id);
+        res.render('products/createProduct', { title: product.nombre, product });
+    },
     update: (req, res) => {
         const {id} = req.params;
         const product = products.find(producto => producto.id == id);
-        res.render('products/update', { title: product.nombre, product });
+        res.redirect("/products/dashboard");
     },
-    delete: (req, res) => {
+    productDelete: (req, res) => {
         const {id} = req.params;
         const product = products.find(producto => producto.id == id);
-        res.render('products/da', { title: product.nombre, product });
+        res.redirect("/products/dashboard");
     },
     example:(req, res) => {
         res.render('products/example', { title: 'kitchennig', product:example });

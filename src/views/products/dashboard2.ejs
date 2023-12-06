@@ -1,0 +1,54 @@
+<%- include("../partials/head.ejs") %>
+  <body class="home__body">
+    <%- include("../partials/header.ejs") %>
+    <main>
+      <a href="/products/formCreate"><button>Crear Producto</button></a>
+      <table class="table">
+        <thead>
+          <tr >
+            <% propiedades.forEach(propiedad => { %>
+                <th scope="col"><%= propiedad %></th>
+            <%}); %>
+            <th> Acciones </th>
+          </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(obj => { %>
+                <tr>
+                    <!-- <% for(propiedad in obj){%>
+                        <% if (propiedad == "id") {%>
+                            <th scope="row"> <%= obj.id %></th>
+                        <%}else{ %>
+                          <td><%= obj[propiedad]%></td>
+                        <%}%>
+                    <%};%> -->
+
+                    <% propiedades.forEach(prop => { %>
+                         <% if (prop == "id") {%>
+                            <th scope="row"> <%= obj.id %></th>
+                        <%}else{ %>
+                          <td><%= obj[prop]%></td>
+                        <%}%>
+                    <%});%>
+                    <td> 
+                        <a
+                        class="home__main__products__product__photo-container--more"
+                        href="/products/detail/<%= obj.id %>"
+                        ><i class="fa-brands fa-readme"></i></a
+                      >
+                      <a class="home__main__products__product__photo-container--more"
+                      href="/products/formUpdate/<%= obj.id %>"
+                        ><i class="fa-solid fa-pen-to-square"></i>
+                      </a>
+                      <a class="home__main__products__product__photo-container--more"
+                      href="/products/delete/<%= obj.id %>"
+                        ><i class="fa-solid fa-trash"></i>
+                      </a></td>
+                </tr>
+            <%}); %>
+        </tbody>
+      </table>
+    </main>
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>
