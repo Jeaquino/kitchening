@@ -1,7 +1,8 @@
+const { log } = require("console");
 const fs = require("fs");
 const path = require("path");
-const json = fs.readFileSync(path.join(__dirname,"../database/products.json"),"utf-8")
-const products = JSON.parse(json);
+
+const { v4: uuidv4 } = require('uuid');
 
 const example = {
     nombre:"",
@@ -15,6 +16,17 @@ const example = {
     }
 }
 
+const readJson = () => {
+    const json = fs.readFileSync(path.join(__dirname,"../database/products.json"),"utf-8")
+    const products = JSON.parse(json);
+    return products;
+}
+
+const saveJson = (products) => {
+    const json = JSON.stringify(products);
+    fs.writeFileSync(path.join(__dirname,"../database/products.json"),json,'utf-8')
+}
+
 const productsController = {
     dashboard:(req, res) => {
         const propiedades = ["id","nombre","imagen","sticker"];
@@ -23,40 +35,64 @@ const productsController = {
             propiedades.push(prop)
         }*/
         
-        console.log(propiedades);
+        const products = readJson();
         res.render('products/dashboard2', { title: "Dashboard", products, propiedades });
     },
 
     formCreate:(req, res) => {
-        res.render('products/createProduct', { title: "Create Product" });
+        res.render('products/createProduct', { title: "Create Product",product:null });
+    },
+
+    formUpdate: (req, res) => {
+        const {id} = req.params;
+        const products = readJson();
+        const product = products.find(producto => producto.id == id);
+        res.render('products/createProduct', { title: product.nombre, product });
     },
 
     create:(req, res) => {
         const producto = req.body;
-        producto.id = products[products.length-1].id + 1;
+        producto.id = uuidv4();
+        const products = readJson();
         products.push(producto);
-        console.log(products);
         const json = JSON.stringify(products);
         fs.writeFileSync(path.join(__dirname,"../database/products.json"),json,'utf-8')
         res.redirect("/products/dashboard");
     },
 
-    detail: (req, res) => {
+    update: (req, res) => {
+        const {nombre,descripcion,imagen,sticker} = req.body;
         const {id} = req.params;
-        const product = products.find(producto => producto.id == id);
-        res.render('products/detail', { title: product.nombre, product });
+        console.log("el id de req update",id)
+        const products = readJson();
+        
+        productsModify = products.map(producto => {
+            if (producto.id == id) {
+                return{
+                id,
+                nombre:nombre.trim(),
+                descripcion,
+                imagen:producto.imagen,
+                sticker
+                }
+            }
+        return producto
+        })
+        saveJson(productsModify);
+        
+        res.redirect(`/products/detail/${id}`);
     },
 
-    formUpdate: (req, res) => {
+    detail: (req, res) => {
         const {id} = req.params;
+        console.log("ID DETAIL:",id);
+        const products = readJson();
+        console.table(products);
         const product = products.find(producto => producto.id == id);
-        res.render('products/createProduct', { title: product.nombre, product });
+        console.log("producto:",product);
+        res.render('products/detail', { title: product.nombre, product });
     },
-    update: (req, res) => {
-        const {id} = req.params;
-        const product = products.find(producto => producto.id == id);
-        res.redirect("/products/dashboard");
-    },
+    
     productDelete: (req, res) => {
         const {id} = req.params;
         const product = products.find(producto => producto.id == id);
