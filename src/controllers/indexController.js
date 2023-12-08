@@ -1,10 +1,8 @@
-const fs = require("fs");
-const path = require("path");
-const json = fs.readFileSync(path.join(__dirname,"../database/products.json"),"utf-8")
-const products = JSON.parse(json);
+const {setJson,getJson} = require("../utility/jsonMethod");
+
 const indexController = {
     home: (req, res) => {
-        res.render('home', { title: 'kitchennig', products });
+        res.render('home', { title: 'kitchennig', products:getJson("products") });
       }
 }
 

@@ -4,6 +4,27 @@ header {
     align-items: center;
 }
 
+.container-icons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.container-icons a {
+    color: var(--colorGrisOscuro);
+}
+
+.container-icons a:hover {
+    color: var(--colorRojo);
+}
+
+.container-icons i {
+    font-size: 2rem;
+    margin: 0 2vw;
+}
+
 #header__logo {
     border-radius: 50%;
     margin: 2% 0;
@@ -71,6 +92,10 @@ header {
     .header__nav ul li {
         padding: 10px;
         background-color: var(--colorGrisOscuro);
+    }
+
+    .header__nav ul li:hover {
+        background-color: var(--colorRojo);
     }
 
     .header__nav ul li a{

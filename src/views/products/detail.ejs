@@ -1,21 +1,21 @@
 <%- include("../partials/head.ejs") %>
-<body class="home__body">
+<body class="detail__body">
     <%- include("../partials/header.ejs") %>
-    <section class="home__main__products">
-          <article class="home__main__products__product">
-            <div class="home__main__products__product__photo-container">
+    <section class="detail__main__products">
+          <article class="detail__main__products__product">
+            <div class="detail__main__products__product__photo-container">
               <img
-                class="home__main__products__product__photo-container--photo"
+                class="detail__main__products__product__photo-container--photo"
                 src="/images/<%= product.imagen %>"
                 alt="<%= product.nombre %>"
               />
               <img
-                class="home__main__products__product__photo-container--special"
+                class="detail__main__products__product__photo-container--special"
                 src="/images/<%= product.sticker %>"
                 alt="Cartel de nuevo"
               />
               <a
-                class="home__main__products__product__photo-container--zoom"
+                class="detail__main__products__product__photo-container--zoom"
                 href="#"
                 >Ampliar foto</a
               >
@@ -25,7 +25,7 @@
               <%= product.descripcion %>
             </p>
             <a
-              class="home__main__products__product__photo-container--more"
+              class="detail__main__products__product__photo-container--more"
               href="/products/detail/<%= product.id %>"
               >ver mas</a
             >

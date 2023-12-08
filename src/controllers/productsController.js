@@ -1,7 +1,4 @@
-const { log } = require("console");
-const fs = require("fs");
-const path = require("path");
-
+const {setJson,getJson} = require("../utility/jsonMethod");
 const { v4: uuidv4 } = require('uuid');
 
 const example = {
@@ -16,26 +13,23 @@ const example = {
     }
 }
 
-const readJson = () => {
-    const json = fs.readFileSync(path.join(__dirname,"../database/products.json"),"utf-8")
-    const products = JSON.parse(json);
-    return products;
-}
-
-const saveJson = (products) => {
-    const json = JSON.stringify(products);
-    fs.writeFileSync(path.join(__dirname,"../database/products.json"),json,'utf-8')
-}
 
 const productsController = {
+
+    //Renderiza la vista dashboard, se define en la variable propiedades la información que se desea mostrar de los productos
+
     dashboard:(req, res) => {
         const propiedades = ["id","nombre","imagen","sticker"];
         
-        /*for ( prop in products[0]) {
+        /* Bloque utilizado para recorrer todas las propiedades del objeto
+
+        for ( prop in products[0]) {
             propiedades.push(prop)
-        }*/
+        }
         
-        const products = readJson();
+        */
+        
+        const products = getJson("products");
         res.render('products/dashboard2', { title: "Dashboard", products, propiedades });
     },
 
@@ -45,7 +39,7 @@ const productsController = {
 
     formUpdate: (req, res) => {
         const {id} = req.params;
-        const products = readJson();
+        const products = getJson("products");
         const product = products.find(producto => producto.id == id);
         res.render('products/createProduct', { title: product.nombre, product });
     },
@@ -53,19 +47,17 @@ const productsController = {
     create:(req, res) => {
         const producto = req.body;
         producto.id = uuidv4();
-        const products = readJson();
+        const products = getJson("products");
         products.push(producto);
-        const json = JSON.stringify(products);
-        fs.writeFileSync(path.join(__dirname,"../database/products.json"),json,'utf-8')
+        setJson(products,"products");
         res.redirect("/products/dashboard");
     },
 
     update: (req, res) => {
         const {nombre,descripcion,imagen,sticker} = req.body;
         const {id} = req.params;
-        console.log("el id de req update",id)
-        const products = readJson();
-        
+        const products = getJson("products");
+        console.log("body",req.body);
         productsModify = products.map(producto => {
             if (producto.id == id) {
                 return{
@@ -78,7 +70,8 @@ const productsController = {
             }
         return producto
         })
-        saveJson(productsModify);
+
+        setJson(productsModify,"products");
         
         res.redirect(`/products/detail/${id}`);
     },
@@ -86,7 +79,7 @@ const productsController = {
     detail: (req, res) => {
         const {id} = req.params;
         console.log("ID DETAIL:",id);
-        const products = readJson();
+        const products = getJson("products");
         console.table(products);
         const product = products.find(producto => producto.id == id);
         console.log("producto:",product);

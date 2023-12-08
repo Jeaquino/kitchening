@@ -1,0 +1,21 @@
+
+.dashboard-button-create{
+    padding: 1vh;
+    margin: 3vw 0;
+    background-color: var(--colorRojo);
+    color: #fff;
+    font-weight: bold;
+}
+
+.dashboard-container-buttons-actions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-container-buttons-actions a:hover{
+    color: #b9a540;
+
+}

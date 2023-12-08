@@ -1,33 +1,35 @@
 <%- include("../partials/head.ejs") %>
   <body class="home__body">
     <%- include("../partials/header.ejs") %>
-    <main>
-        <form action="<%= product ? `/products/update/${product.id}?_method=PUT` : "/products/create"; %>" method="post">
-            <div>
+    <main class="createProduct--main">
+        
+        <form action="<%= product ? `/products/update/${product.id}?_method=PUT` : "/products/create"; %>" method="post" class="form-products">
+            <h2><%= product ? "Edicion de producto" : "Crea un producto"%></h2>
+            <div class="createProduct--main--form--div">
                 <label for="nombre" id="nombre"> Ingrese el nombre del producto</label>
                 <input type="text" name="nombre" value="<%= product ? product.nombre : null; %>">
             </div>
-            <div>
+            <div class="createProduct--main--form--div">
                 <label for="descripcion" >Agregue una breve descripcion</label>
                 <input type="text" name="descripcion" id="descripcion" value="<%= product ? product.descripcion : null; %>">
             </div>
             
-            <div>
+            <div class="createProduct--main--form--div--image">
                 <label for="imagen" >selecciona una imagen para el producto</label>
                 <input type="file" name="imagen" id="imagen" value="<%= product ? product.imagen : null; %>">
-                <img src="/images/<%= product ? product.imagen : "default.webp" %>" alt="<%= product ? product.nombre : null; %>"> 
+                <img src="/images/<%= product ? product.imagen : "default.webp" %>" alt="<%= product ? product.nombre : null; %>" id="createProduct-image-preview"> 
             </div>
-            <div>
-                <label for="sticker">selecione</label>
+            <div class="createProduct--main--form--div">
+                <label for="sticker">selecione una categoria</label>
                 <select name="sticker" id="sticker">
                     <option value="img-nuevo.png" <%= product ? product.sticker == "img-nuevo.png" ? "selected" : null : null;%> >novedad</option>
                     <option value="img-descuento.png" <%= product ? product.sticker == "img-descuento.png" ? "selected" : null : null ;%> >descuento</option>
                     <option value="img-gratis.png" <%= product ?product.sticker == "img-gratis.png" ? "selected" : null : null;%> >gratuito</option>
                 </select>
             </div>
-            <div>
-                <button type="reset">Borrar</button>
-                <button type="submit"><%= product ? "Editar" : "Crear";%></button>
+            <div class="createProduct--main--form--div--buttons">
+                <button type="reset" id="reset">Borrar</button>
+                <button type="submit" id="submit"><%= product ? "Editar" : "Crear";%></button>
             </div>
         </form>
     </main>
