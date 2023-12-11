@@ -1,0 +1,41 @@
+<%- include("../partials/head.ejs") %>
+<body class="register__body">
+<%- include("../partials/header.ejs") %>
+<main class="register__body__main">
+<form action="/users/register" method="post" class="register__body__form">
+    <div class="register__body__form__container__2_inputs col-12">
+        <div class="register__body__form__container col-12">
+            <label for="name">Nombres</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div class="register__body__form__container col-12">
+            <label for="surname">Apellido</label>
+            <input type="text" id="surname" name="surname">
+        </div>
+    </div>
+    <div class="register__body__form__container">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email">
+    </div>
+    <div class="register__body__form__container">
+        <label for="age">Edad</label>
+        <input type="number" min="18" name="age" id="age">
+    </div>
+    <div class="register__body__form__container">
+        <label for="date">Fecha de Nacimiento</label>
+        <input type="date" name="date" id="date">
+    </div>
+    <div class="input-group mb-3">
+        <label for="profile" class="col-12 mt-3">Foto de perfil</label>
+        <input type="file" class="form-control" id="inputGroupFile02">
+    </div>
+    <div class="register__body__form__container__buttons">
+        <button type="reset">Borrar</button>
+        <button type="submit">Registrarse</button>
+    </div>
+
+</form>
+</main>
+<%- include("../partials/footer.ejs") %>
+</body>
+</html>

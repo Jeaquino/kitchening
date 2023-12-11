@@ -1,9 +1,9 @@
 const usersController = {
     login: (req, res) => {
-        res.render('home', { title: 'kitchennig' });
+        res.render('./users/login', { title: 'kitchennig' });
       },
     register: (req, res) => {
-        res.render('home', { title: 'kitchennig' });
+        res.render('./users/register', { title: 'kitchennig' });
       },
 }
 
