@@ -1,0 +1,40 @@
+<%- include("../partials/head.ejs") %>
+  <body class="home__body">
+    <%- include("../partials/header.ejs") %>
+    <main class="createProduct--main">
+        
+        <form action="<%= `/products/update/${product.id}?_method=PUT` %>" method="post" class="form-products">
+            <h2><%= "Edicion de producto"%></h2>
+            <div class="createProduct--main--form--div">
+                <label for="nombre" id="nombre"> Ingrese el nombre del producto</label>
+                <input type="text" name="nombre" value="<%= product.nombre %>" required minlength="6">
+            </div>
+            <div class="createProduct--main--form--div">
+                <label for="descripcion" >Agregue una breve descripcion</label>
+                <input type="text"  name="descripcion" id="descripcion" value="<%= product.descripcion %>"  minlength="30" maxlength="180" required >
+            </div>
+            
+            <div class="createProduct--main--form--div--image">
+                <label for="imagen" >selecciona una imagen para el producto</label>
+                <input type="file" name="imagen" id="imagen" value="<%= product.imagen %>">
+                <img src="/images/<%= product.imagen ? product.imagen : "default.webp" %>" alt="<%= product.nombre %>" id="createProduct-image-preview"> 
+            </div>
+            <div class="createProduct--main--form--div">
+                <label for="sticker">selecione una categoria</label>
+                <select name="sticker" id="sticker">
+                    <option value="img-nuevo.png" <%= product.sticker == "img-nuevo.png" ? "selected" : null;%> >novedad</option>
+                    <option value="img-descuento.png" <%=  product.sticker == "img-descuento.png" ? "selected" : null ;%> >descuento</option>
+                    <option value="img-gratis.png" <%= product.sticker == "img-gratis.png" ? "selected" : null;%> >gratuito</option>
+                </select>
+            </div>
+            <div class="createProduct--main--form--div--buttons">
+                <button type="submit" id="submit"><%= "Editar"%></button>
+            </div>
+        </form>
+        <form action="/products/delete/<%= product.id %>?_method=DELETE" method="post">
+            <button type="delete" ><i class="fa-solid fa-trash"></i></button>
+        </form>
+    </main>
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>

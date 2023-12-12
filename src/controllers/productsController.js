@@ -41,7 +41,8 @@ const productsController = {
         const {id} = req.params;
         const products = getJson("products");
         const product = products.find(producto => producto.id == id);
-        res.render('products/createProduct', { title: product.nombre, product });
+        console.log("producto seleccionado:",product);
+        res.render('products/updateProduct', { title: product.nombre, product });
     },
 
     create:(req, res) => {
@@ -57,14 +58,14 @@ const productsController = {
         const {nombre,descripcion,imagen,sticker} = req.body;
         const {id} = req.params;
         const products = getJson("products");
-        console.log("body",req.body);
+        
         productsModify = products.map(producto => {
             if (producto.id == id) {
                 return{
                 id,
                 nombre:nombre.trim(),
-                descripcion,
-                imagen:producto.imagen,
+                descripcion:descripcion.trim(),
+                imagen: (imagen ? imagen : producto.imagen),
                 sticker
                 }
             }
@@ -88,9 +89,13 @@ const productsController = {
     
     productDelete: (req, res) => {
         const {id} = req.params;
-        const product = products.find(producto => producto.id == id);
+        const products = getJson("products");
+        const newArrayProducts = products.filter(producto => producto.id != id);
+        console.log("newArrayProducts",newArrayProducts);
+        setJson(newArrayProducts,"products");
         res.redirect("/products/dashboard");
     },
+    
     example:(req, res) => {
         res.render('products/example', { title: 'kitchennig', product:example });
     }

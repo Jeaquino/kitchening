@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Julian Eduardo",
+        "surname": "Aquino",
+        "email": "julian.eduardo.aquino@gmail.com",
+        "age": "32",
+        "date": "1990-03-20",
+        "id": "f0af0a47-088c-4c4a-aaa6-b0255e156f29"
+    },
+    {
+        "name": "Eze",
+        "surname": "Calvo",
+        "email": "eze@gmail.com",
+        "age": "32",
+        "date": "1991-11-20",
+        "id": "e87230a9-daac-44df-bc90-3bc203563c10"
+    }
+]

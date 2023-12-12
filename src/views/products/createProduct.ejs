@@ -3,7 +3,7 @@
     <%- include("../partials/header.ejs") %>
     <main class="createProduct--main">
         
-        <form action="<%= product ? `/products/update/${product.id}?_method=PUT` : "/products/create"; %>" method="post" class="form-products">
+        <form action="<%= product ? `/products/update/:${product.id}?_method=PUT` : "/products/create"; %>" method="post" class="form-products">
             <h2><%= product ? "Edicion de producto" : "Crea un producto"%></h2>
             <div class="createProduct--main--form--div">
                 <label for="nombre" id="nombre"> Ingrese el nombre del producto</label>
