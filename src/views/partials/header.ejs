@@ -3,9 +3,13 @@
       <a href="/products/cart">
         <i class="fa-solid fa-cart-shopping"></i>
       </a>
+      <% if(locals.session){%>
+        <p><%= session.user %> </p>
+      <% }else{ %>
       <a href="/users/login">
         <i class="fa-solid fa-user"></i>
       </a>
+      <% } %>
       <a href="/products/dashboard">
         <i class="fa-solid fa-gear"></i>
       </a>

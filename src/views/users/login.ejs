@@ -5,14 +5,17 @@
     <form action="/users/login" method="post" class="login__body__main__form">
         <h2>Inicie sesion</h2>
         <div class="login__body__main__form__container">
-            <label for="user">Ingrese su correo o usuario</label>
-            <input type="text" name="user"></div>
+            <label for="email">Ingrese su correo o usuario</label>
+            <input type="text" name="email"></div>
         <div class="login__body__main__form__container">
             <label for="password">Ingrese su contraseña</label>
             <input type="password" name="password"></div>
         <div class="login__body__main__form__container__buttons">
             <button type="reset" id="reset">Borrar</button>
             <button type="submit" id="submit">Login</button>
+            <% if (locals.error) { %>
+                 <p> <%= error %> </p> 
+            <% } %>
         </div>
     </form>
     <h5>No posees cuenta? <a href="/users/register">Registrarse</a></h5>

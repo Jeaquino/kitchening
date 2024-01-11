@@ -2,7 +2,8 @@ const {setJson,getJson} = require("../utility/jsonMethod");
 
 const indexController = {
     home: (req, res) => {
-        res.render('home', { title: 'kitchennig', products:getJson("products") });
+        console.log(req.session)
+        res.render('home', { title: 'kitchennig', products:getJson("products")});
       }
 }
 
