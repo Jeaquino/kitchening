@@ -3,8 +3,8 @@
       <a href="/products/cart">
         <i class="fa-solid fa-cart-shopping"></i>
       </a>
-      <% if(locals.session){%>
-        <p><%= session.user %> </p>
+      <% if(locals.usuario){%>
+        <p><%= usuario.name %> </p>
       <% }else{ %>
       <a href="/users/login">
         <i class="fa-solid fa-user"></i>
