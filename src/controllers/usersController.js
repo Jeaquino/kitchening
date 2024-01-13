@@ -1,24 +1,32 @@
 const {setJson,getJson} = require("../utility/jsonMethod");
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
+const {validationResult} = require('express-validator');
 const usersController = {
     login: (req, res) => {
         res.render('users/login', { title: 'kitchennig' });
       },
       
     processlogin: (req, res) => {
+        const errores = validationResult(req);
+        
+        if(!errores.isEmpty()) {
+          res.render("/users/login",{errores:errores.mapped(), title:"kitchennig"});
+        }
+
         const {email} = req.body;
         const users = getJson("users");
         const user = users.find(usuario => usuario.email == email);
-        if(user){
-          req.session.user = user;
-          res.cookie('userEmail',user.email,{maxAge: 1000 * 60 * 15 });
+        
+        req.session.user = user;
+
+        if(req.body.remember) {
+          res.cookie('userEmail',user,{maxAge: 1000 * 60 * 15 });
           res.cookie('rememberMe',"true", {maxAge: 1000 * 60 * 15 });
-          res.redirect('/');
-        }else{
-          res.render("/users/login",{error:"No se encontro el usuario", title:"kitchennig"});
         }
-      },
+
+        res.redirect('/');
+        },
       
     register: (req, res) => {
         res.render('./users/register', { title: 'kitchennig' });
