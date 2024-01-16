@@ -20,4 +20,4 @@ module.exports = [
         console.log("user-password:", user.password);
         return bcrypt.compareSync(value, user.password);
     }).withMessage("La contraseña no es correcta")
-]
+];
