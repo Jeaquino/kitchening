@@ -4,7 +4,15 @@
         <i class="fa-solid fa-cart-shopping"></i>
       </a>
       <% if(locals.usuario){%>
-        <p><%= usuario.name %> </p>
+          <img src="/images/users/<%= usuario.image %>" alt="foto de perfil" id="image-profile">
+          <div id="user-name">
+            <ul>
+              <li id="user-name"><%= usuario.name %></li>
+              <li><a class="user-menu" href="/users/profile/<%=usuario.id%>">Profile</a></li>
+              <li><a class="user-menu" href="/users/logout">Cerrar sesion</a></li>
+            </ul>
+        </div>
+
       <% }else{ %>
       <a href="/users/login">
         <i class="fa-solid fa-user"></i>

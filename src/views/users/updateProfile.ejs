@@ -1,0 +1,54 @@
+<%- include("../partials/head.ejs") %>
+<body class="register__body">
+<%- include("../partials/header.ejs") %>
+<main class="register__body__main">
+<form action="/users/profile/<%=user.id%>?_method=PUT" method="post" class="register__body__form" enctype="multipart/form-data">
+    <div class="register__body__form__container__2_inputs col-12">
+        <div class="register__body__form__container col-12">
+            <label for="name">Nombres</label>
+            <input type="text" id="name" name="name" value="<%= locals.user ? user.name : locals.old && old.name ? old.name : null %>" >
+            <p><%= locals.errores && errores.name ? errores.name.msg : null %> </p>
+        </div>
+        <div class="register__body__form__container col-12">
+            <label for="surname">Apellido</label>
+            <input type="text" id="surname" name="surname" value="<%= locals.user ? user.surname : locals.old && old.surname ? old.surname : null %>">
+            <p> <%= locals.errores && errores.surname ? errores.surname.msg : null %> </p>
+        </div>
+    </div>
+    <div class="register__body__form__container">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" value="<%= locals.user ? user.email : locals.old && old.email ? old.email : null %>">
+        <p> <%= locals.errores && errores.email ? errores.email.msg : null %> </p>
+    </div>
+    <% if (locals.usuario && usuario.rol == 'admin') {%>
+        <div class="register__body__form__container">
+            <label for="rol">Rol</label>
+            <input type="text" id="rol" name="rol" value="<%= locals.user ? user.rol : locals.old && old.rol ? old.rol : null %>">
+            <p> <%= locals.errores && errores.rol ? errores.rol.msg : null %> </p>
+        </div>    
+    <% } %>
+    <div class="register__body__form__container">
+        <label for="age">Edad</label>
+        <input type="number" name="age" id="age" value="<%= locals.user ? user.age : locals.old && old.age ? old.age : null %>">
+        <p><%= locals.errores && errores.age ? errores.age.msg : null %> </p>
+    </div>
+    <div class="register__body__form__container">
+        <label for="date">Fecha de Nacimiento</label>
+        <input type="date" name="date" id="date" value="<%= locals.user ? user.date : locals.old && old.date ? old.date : null %>">
+        <p><%= locals.errores && errores.date ? errores.date.msg : null %> </p>
+    </div>
+    <div class="input-group mb-3">
+        <img src="/images/users/<%= user.image %>" alt="profile image">
+        <label for="image" class="col-12 mt-3">Foto de perfil</label>
+        <input type="file" class="form-control" id="inputGroupFile02" name="image">
+        <p><%= locals.errores && errores.image ? errores.image.msg : null %> </p>
+    </div>
+    <div class="register__body__form__container__buttons">
+        <button type="reset">Borrar</button>
+        <button type="submit">Registrarse</button>
+    </div>
+</form>
+</main>
+<%- include("../partials/footer.ejs") %>
+</body>
+</html>

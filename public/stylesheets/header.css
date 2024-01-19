@@ -67,6 +67,32 @@ header {
         opacity: 5%;
     }
 }
+#user-icon{
+    margin-top: 1vh;
+}
+
+#image-profile{
+    width: 5%;
+    border-radius: 50%;
+    display: inline;
+}
+
+.user-menu {
+    display: none;
+}
+
+#user-name:hover .user-menu{
+    display: inline
+}
+
+.user-name ul{
+    list-style: none;
+    text-decoration: none;
+}
+
+.user-menu {
+    text-decoration: none;
+}
 
 /* media para tablet */
 

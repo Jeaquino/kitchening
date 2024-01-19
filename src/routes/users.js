@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {login,register,createUser,processlogin,profile, dashboard} = require("../controllers/usersController");
+const {login,register,createUser,processlogin,profile, dashboard,logout, processUpdate} = require("../controllers/usersController");
 const loginValidator = require("../validations/loginValidator");
 const upload = require('../validations/uploadUser');
 const registerValidator = require("../validations/registerValidator");
@@ -14,6 +14,8 @@ router
 .post('/login', loginValidator, processlogin)
 .get('/register', register)
 .post('/register', upload.single('image'), registerValidator, createUser)
-.get('/profile',sessionValidate, profile)
+.get('/profile/:id',sessionValidate, profile)
+.put('/profile/:id', upload.single('image'), processUpdate)
 .get('/dashboard', isAdmin, dashboard)
+.get('/logout', logout)
 module.exports = router;
