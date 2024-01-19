@@ -9,20 +9,19 @@ const usersController = {
       
     processlogin: (req, res) => {
         const errores = validationResult(req);
-        console.log(errores);
         
         if(!errores.isEmpty()) {
-          res.render("/users/login",{errores:errores.mapped(), title:"kitchennig"});
+          res.render("/users/login",{errores:errores.mapped(), title:"kitchennig", usuario:req.session.user});
         }
-
+        console.log("body:",req.body)
         const {email} = req.body;
         const users = getJson("users");
         const user = users.find(usuario => usuario.email == email);
         
         req.session.user = user;
 
-        if(req.body.remember) {
-          res.cookie('userEmail',user,{maxAge: 1000 * 60 * 15 });
+        if(req.body.remember == "true") {
+          res.cookie('user',user,{maxAge: 1000 * 60 * 15 });
           res.cookie('rememberMe',"true", {maxAge: 1000 * 60 * 15 });
         }
 
@@ -30,8 +29,9 @@ const usersController = {
         },
       
     register: (req, res) => {
-        res.render('./users/register', { title: 'kitchennig' });
+        res.render('./users/register', { title: 'kitchennig', usuario:req.session.user });
       },
+
     createUser: (req, res) => {
       const errores = validationResult(req);
       
@@ -43,7 +43,7 @@ const usersController = {
       }
       else{
       const users = getJson("users");
-      const {name,surname,email,age,date,password} = req.body;
+      const {name,surname,email,age,date,password,rol} = req.body;
       const id = uuidv4();
       const user = {
         id,
@@ -53,13 +53,18 @@ const usersController = {
         age,
         date,
         image:req.file ? req.file.filename : "default.jpg", 
-        password: bcrypt.hashSync(password,10)
+        password: bcrypt.hashSync(password,10),
+        rol: rol ? rol : "user"
       }
-      console.log(user);
-      users.push(user);
       setJson(users,"users");
       res.redirect('/users/login');
     }
+    },
+    profile:(req,res)=>{
+      res.send(req.session.user)
+    },
+    dashboard:(req,res)=>{
+      res.send(req.session.user)
     }
 }
 

@@ -30,11 +30,11 @@ const productsController = {
         */
         
         const products = getJson("products");
-        res.render('products/dashboard2', { title: "Dashboard", products, propiedades });
+        res.render('products/dashboard2', { title: "Dashboard", products, propiedades, usuario:req.session.user });
     },
 
     formCreate:(req, res) => {
-        res.render('products/createProduct', { title: "Create Product",product:null });
+        res.render('products/createProduct', { title: "Create Product",product:null, usuario:req.session.user });
     },
 
     formUpdate: (req, res) => {
@@ -42,7 +42,7 @@ const productsController = {
         const products = getJson("products");
         const product = products.find(producto => producto.id == id);
         console.log("producto seleccionado:",product);
-        res.render('products/updateProduct', { title: product.nombre, product });
+        res.render('products/updateProduct', { title: product.nombre, product,usuario:req.session.user });
     },
 
     create:(req, res) => {
@@ -84,7 +84,7 @@ const productsController = {
         console.table(products);
         const product = products.find(producto => producto.id == id);
         console.log("producto:",product);
-        res.render('products/detail', { title: product.nombre, product });
+        res.render('products/detail', { title: product.nombre, product, usuario:req.session.user });
     },
     
     productDelete: (req, res) => {
@@ -97,7 +97,7 @@ const productsController = {
     },
     
     example:(req, res) => {
-        res.render('products/example', { title: 'kitchennig', product:example });
+        res.render('products/example', { title: 'kitchennig', product:example, usuario:req.session.user });
     }
 }
 

@@ -20,6 +20,14 @@
         <input type="text" id="email" name="email" value="<%= locals.old && old.email ? old.email : null %>">
         <p> <%= locals.errores && errores.email ? errores.email.msg : null %> </p>
     </div>
+    <% if (locals.usuario && usuario.rol == 'admin') {%>
+        <div class="register__body__form__container">
+            <label for="rol">Rol</label>
+            <input type="text" id="rol" name="rol" value="<%= locals.old && old.rol ? old.rol : null %>">
+            <p> <%= locals.errores && errores.rol ? errores.rol.msg : null %> </p>
+        </div>    
+    <% } %>
+
     <div class="register__body__form__container">
         <label for="password">Password</label>
         <input type="password" id="password" name="password">

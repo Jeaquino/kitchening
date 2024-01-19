@@ -24,14 +24,17 @@ module.exports = [
     }).withMessage("Debe ser mayor de 18 años para registrarse"),
 
     body('password').notEmpty().withMessage("El campo no puede estar vacio").bail()
-    .custom((value)=> {
+    .custom((value,{req})=> {
         return value == req.body.password2;
     }).withMessage("Los password no coinciden"),
 
     body('date').notEmpty().withMessage("El campo no puede estar vacio").bail()
-    .isDate().withMessage("El Campo tiene que ser una fecha valida").bail(),
+    .custom(value => {
+        return !isNaN(Date.parse(value))
+    })
+    .withMessage("El Campo tiene que ser una fecha valida").bail(),
 
-    body('image').custom(({req})=>{
+    body('image').custom((value, {req})=>{
         if (req.errorValidationImage) {
             return false;
         };
