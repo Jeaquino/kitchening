@@ -94,6 +94,7 @@ const usersController = {
             rol: rol ? rol : "user"
           }
         }
+        return element
       });
       setJson(usuarios,"users");
       res.redirect(`/users/profile/${id}`);
