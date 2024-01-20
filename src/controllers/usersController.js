@@ -6,7 +6,7 @@ const usersController = {
     login: (req, res) => {
         res.render('users/login', { title: 'kitchennig' });
       },
-      logout:(req,res)=>{
+    logout:(req,res)=>{
         req.session.destroy();
         if (req.cookies.user) {
           res.clearCookie('user');
@@ -20,15 +20,16 @@ const usersController = {
         if(!errores.isEmpty()) {
           res.render("./users/login",{errores:errores.mapped(), title:"kitchennig", usuario:req.session.user});
         }
-        console.log("body:",req.body)
+
         const {email} = req.body;
         const users = getJson("users");
         const user = users.find(usuario => usuario.email == email);
         
         req.session.user = user;
+        delete user.password
+        res.cookie('user',user,{maxAge: 1000 * 60 * 15 });
 
         if(req.body.remember == "true") {
-          res.cookie('user',user,{maxAge: 1000 * 60 * 15 });
           res.cookie('rememberMe',"true", {maxAge: 1000 * 60 * 15 });
         }
 
@@ -69,8 +70,6 @@ const usersController = {
     },
     profile:(req,res)=>{
       const {id} = req.params;
-      console.log("id",id);
-      console.log("req.params",req.params);
       const users = getJson("users");
       const user = users.find(elemento => elemento.id == id);
       res.render('./users/updateProfile', { title: 'kitchennig', user, usuario:req.session.user });
@@ -79,7 +78,6 @@ const usersController = {
       const {id} = req.params;
       const {name,surname,email,age,date,rol} = req.body;
       const users = getJson("users");
-      const usuario = users.find(elemento => elemento.id == id);
       const usuarios = users.map(element => {
         if (element.id == id) {
           return {
@@ -89,14 +87,18 @@ const usersController = {
             email:email.trim(),
             age,
             date,
-            image:req.file ? req.file.filename : usuario.image, 
-            password: usuario.password,
+            image:req.file ? req.file.filename : element.image, 
+            password: element.password,
             rol: rol ? rol : "user"
           }
         }
         return element
       });
       setJson(usuarios,"users");
+      const userUpdate = usuarios.find(elemento => elemento.id == id);
+      req.session.user = userUpdate;
+      delete userUpdate.password
+      res.cookie('user',(userUpdate))
       res.redirect(`/users/profile/${id}`);
     },
     dashboard:(req,res)=>{
