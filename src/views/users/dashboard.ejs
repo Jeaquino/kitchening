@@ -1,0 +1,38 @@
+<%- include("../partials/head.ejs") %>
+  <body class="home__body">
+    <%- include("../partials/header.ejs") %>
+    <main>
+      <a href="/users/create"><button>Crear Producto</button></a>
+      <section class="home__main__products">
+          <% users.forEach(user => {%>
+            <article class="home__main__products__product">
+              <div class="home__main__products__product__photo-container">
+                <img
+                  class="home__main__products__product__photo-container--photo"
+                  src="/images/<%= user.imagen %>"
+                  alt="<%= user.name %>"
+                />
+              </div>
+              <h4><%= user.name %></h4>
+              <div class="contenedor-botones-dashboard">
+              <a
+                class="home__main__products__product__photo-container--more"
+                href="/users/detail/<%= user.id %>"
+                ><i class="fa-brands fa-readme"></i></a
+              >
+              <a class="home__main__products__product__photo-container--more"
+              href="/users/update/<%= user.id %>"
+                ><i class="fa-solid fa-pen-to-square"></i>
+              </a>
+              <form action="/users/delete/<%= user.id %>?_method=DELETE" method="post">
+                <button type="submit"><i class="fa-solid fa-trash"></i></button>
+              </form>   
+            </div>
+            </article>
+          <% }); %>
+        
+      </section>
+    </main>
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>

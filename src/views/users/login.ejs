@@ -13,9 +13,10 @@
         <div class="login__body__main__form__container__buttons">
             <button type="reset" id="reset">Borrar</button>
             <button type="submit" id="submit">Login</button>
-            <% if (locals.error) { %>
-                 <p> <%= error %> </p> 
-            <% } %>
+            <% if (locals.errores) { %>
+                <% errores.forEach(error => {%>
+                <p> <%= error.msg %> </p> 
+            <% })} %>
         </div>
         <div>
             <label for="remember">Mantener sesion</label>

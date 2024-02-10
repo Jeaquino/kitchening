@@ -18,9 +18,14 @@
         <i class="fa-solid fa-user"></i>
       </a>
       <% } %>
+      <% if(locals.usuario && usuario.rol == 'admin'){%>
       <a href="/products/dashboard">
         <i class="fa-solid fa-gear"></i>
       </a>
+      <a href="/users/dashboard">
+        <i style="color:red" class="fa-solid fa-gear"></i>
+      </a>
+      <% } %>
     </div>
     <img src="/images/logo.jpg" alt="Imagen del logo" id="header__logo" />
     <div>

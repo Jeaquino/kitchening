@@ -26,36 +26,6 @@
         "rol": "Admin"
     },
     {
-        "id": "e041ebcc-b8c3-4513-9651-127b173bc369",
-        "name": "",
-        "surname": "",
-        "email": "",
-        "age": "",
-        "date": "",
-        "image": "default.jpg",
-        "password": "$2a$10$nBdyP4HIj.ITk5QoxrwQAugAS6w90crQunTt2mQg0PvU64//gCgYm"
-    },
-    {
-        "id": "91f6fec3-20c7-4045-b859-1236c323ec81",
-        "name": "",
-        "surname": "",
-        "email": "",
-        "age": "",
-        "date": "",
-        "image": "default.jpg",
-        "password": "$2a$10$UDNoR4yQiMMTjMaD11XbV.ERzdX1Jr.mem00Po9KC2AAOwVWTQZp."
-    },
-    {
-        "id": "686f844c-fc08-4656-937f-def4d3a815e4",
-        "name": "Julian Eduardo",
-        "surname": "Aquino",
-        "email": "julian.eduardo.aquino@gmail.com",
-        "age": "18",
-        "date": "1990-03-20",
-        "image": "leo.png-1705617635560-463487e4-20fa-4d0d-b533-ea38f4979808.png",
-        "password": "$2a$10$wNfEecQzgDCzn37CzpcMJ.eehSpBVhs1uaitzQFT8FKhoohHxwnwK"
-    },
-    {
         "id": "30034577-2255-4184-b457-8000124a13cb",
         "name": "Gustavo",
         "surname": "Insfran",
