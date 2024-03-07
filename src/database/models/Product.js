@@ -1,43 +1,32 @@
-module.exports = (sequelize,DataTypes) => {
-    const alias = "Product";
-    const cols = {
-        id:{
-            type:DataTypes.INTEGER,
-            allowNull: false,
-            autoIncrement: true,
-            primaryKey:true
-        },
-        name:{
-            type:DataTypes.STRING(255),
-            allowNull: false,
-        },
-        description:{
-            type:DataTypes.TEXT,
-            allowNull: false,
-        },
-        price:{
-            type:DataTypes.INTEGER,
-            allowNull: false,
-            unsigned:false
-        },
-        discount:{
-            type:DataTypes.INTEGER,
-            allowNull: true,
-            unsigned:false
-        },
-        sectionId:{
-            type:DataTypes.INTEGER,
-            allowNull: true
-        },
-        brandId:{
-            type:DataTypes.INTEGER,
-            allowNull: false
-        },
-    };
-    const config = {
-        tableName:"products",
-        timestamp: true
-    };
-    const Product = sequelize.define(alias,cols,config);
-    return Product;
-}
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Product extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      this.hasMany(models.Image,{as:"images",foreignKey:'image_id'});
+      this.hasMany(models.Item,{as:"items",foreignKey:'product_id'});
+      this.belongsTo(models.Category,{as:"categories",foreignKey:'category_id'})
+      this.belongsToMany(models.Size,{ through: models.Stock, as: 'products', foreignKey:'product_id',otherKey:'size_id'});
+    }
+  }
+  Product.init({
+    name: DataTypes.STRING,
+    price: DataTypes.INTEGER,
+    discount: DataTypes.INTEGER,
+    description: DataTypes.TEXT,
+    image: DataTypes.STRING,
+    category_id: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'Product',
+    timestamps:true
+  });
+  return Product;
+};

@@ -1,4 +1,3 @@
-const {setJson,getJson} = require("../utility/jsonMethod");
 
 const indexController = {
     home: (req, res) => {
